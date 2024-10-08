@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile History</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="memberbar">
+
+    </div>
+    
+  <div class="container" style="padding: 3vh; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);width: 80vw;height: 75vh;position: absolute;top: 52%;left: 50%;transform: translate(-50%, -50%);">
+    <table class="table" id="data-table">
+        <thead>
+            <tr>
+              <th scope="col">Sl No.</th>
+              <th scope="col">Book</th>
+              <th scope="col">Borrowed</th>
+              <th scope="col">returned</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="../auth.js"></script>
+  <script src="./memberbar.js"></script>
+  <script src="./bookdetails.js"></script>
+  
+  <script>
+    const token = localStorage.getItem('token');
+    const id = localStorage.getItem('id');
+    const username = document.getElementById('username');
+    const bookTable = document.querySelector('#data-table tbody');
+
+    if (!token) {
+      window.location.href = '../login.html';
+    } else {
+      fetchUserData();
+      getUserHistory();
+    }
+
+    async function getUserHistory() {
+        const res = await fetch(`http://localhost:5000/api/borrows/getByUserId/${id}`,{
+            headers: { 'Authorization': `Bearer ${token}` }}
+        )
+        const data = await res.json();
+        
+    
+      data.forEach((data, index) => {
+        const bor = new Date(data.borrowedAt)
+        const bordate = bor.toLocaleDateString("en-IN")
+        const bortime = bor.toLocaleTimeString("en-IN")
+        const ret = new Date(data.returnedAt)
+        const retdate = ret.toLocaleDateString("en-IN")
+        const rettime = ret.toLocaleTimeString("en-IN")
+        console.log(data.borrowedAt)
+        const bookTableRow = document.createElement('tr');
+        bookTableRow.innerHTML = `
+          <td>${index + 1}</td>
+          <td style="cursor:pointer" onclick="window.location.href = 'bookdetails.html?id=${data.bookId._id}';">${data.bookId.title}</td>
+          <td>${bordate}<br> ${bortime}</td>
+          <td>${retdate}<br> ${rettime}</td>
+          
+        `;
+        bookTable.appendChild(bookTableRow);
+      });
+    }
+  </script>
+</body>
+</html>
