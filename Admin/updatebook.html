@@ -61,7 +61,7 @@
       const coverURL = document.getElementById('coverURL').value;
       const description = document.getElementById('description').value;
 
-      await fetch(`http://localhost:5000/api/books/${param1}`, {
+      await fetch(`api/books/${param1}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

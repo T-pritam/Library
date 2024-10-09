@@ -62,7 +62,7 @@
     }, 500));
   
     async function fetchBooks() {
-      const response = await fetch('http://localhost:5000/api/books', {
+      const response = await fetch(`${backendRoute}api/books`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const books = await response.json();
@@ -102,7 +102,7 @@
     }   
 
     async function deleteBook(id) {
-      await fetch(`http://localhost:5000/api/books/${id}`, {
+      await fetch(`${backendRoute}api/books/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

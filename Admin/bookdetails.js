@@ -1,7 +1,7 @@
 async function fetchBookById(param1) {
     console.log("param11 : ", param1);
     if (param1!=null) {
-        const response = await fetch(`http://localhost:5000/api/books/${param1}`,{
+        const response = await fetch(`${backendRoute}api/books/${param1}`,{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }

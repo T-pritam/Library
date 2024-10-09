@@ -1,5 +1,5 @@
 async function fetchUserById(param1) {
-    const response = await fetch(`http://localhost:5000/api/auth/getUser/${param1}`, {
+    const response = await fetch(`${backendRoute}api/auth/getUser/${param1}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -9,7 +9,7 @@ async function fetchUserById(param1) {
 }
 
 async function updateUserById(id,data){
-  await fetch(`http://localhost:5000/api/auth/${id}`, {
+  await fetch(`${backendRoute}api/auth/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ async function updateUserById(id,data){
 
 async function deleteUserById(id) {
   console.log("USer delete")
-  await fetch(`http://localhost:5000/api/auth/${id}`, {
+  await fetch(`${backendRoute}api/auth/${id}`, {
     method: 'DELETE',
     headers: {
       'Authorization': `Bearer ${token}`

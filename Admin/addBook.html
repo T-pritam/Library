@@ -51,7 +51,7 @@
       const coverURL = document.getElementById('coverURL').value;
       const description = document.getElementById('description').value;
 
-      await fetch('http://localhost:5000/api/books', {
+      await fetch(`${backendRoute}api/books`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

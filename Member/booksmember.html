@@ -57,7 +57,7 @@
     }, 500));
 
     async function fetchBooks() {
-      const response = await fetch('http://localhost:5000/api/books', {
+      const response = await fetch(`${backendRoute}api/books`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const books = await response.json();
@@ -85,7 +85,7 @@
     }
     
     async function borrowOrReturnBook(bookId, isAvailable) {
-            const url = isAvailable ? 'http://localhost:5000/api/borrows/borrow' : 'http://localhost:5000/api/borrows/return';
+            const url = isAvailable ? `${backendRoute}api/borrows/borrow` : `${backendRoute}api/borrows/return`;
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {

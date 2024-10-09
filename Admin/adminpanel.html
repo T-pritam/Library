@@ -47,11 +47,12 @@
     }
 
     async function fetchUsers() {
-      
-      const response = await fetch('http://localhost:5000/api/auth/getAll', {
+      console.log(token)
+      const response = await fetch(`${backendRoute}api/auth/getAll`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const users = await response.json()
+      console.log(users)
             userTable = document.querySelector('#data-table tbody');
           users.forEach((user, index) => {
                 const userTableRow = document.createElement('tr');

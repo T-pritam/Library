@@ -12,7 +12,7 @@ function debounce(func, delay) {
     try {
       const searchEmpty = document.getElementById('searchEmpty');
       const bookTable = document.querySelector('#data-table tbody');
-      const response = await fetch(`http://localhost:5000/api/books/search/${query}`);
+      const response = await fetch(`${backendRoute}api/books/search/${query}`);
       const books = await response.json();
 
       bookTable.innerHTML = '';

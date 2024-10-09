@@ -44,7 +44,7 @@
     }
 
     async function getUserHistory() {
-        const res = await fetch(`http://localhost:5000/api/borrows/getByUserId/${id}`,{
+        const res = await fetch(`${backendRoute}api/borrows/getByUserId/${id}`,{
             headers: { 'Authorization': `Bearer ${token}` }}
         )
         const data = await res.json();
