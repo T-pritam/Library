@@ -57,13 +57,14 @@
         const ret = new Date(data.returnedAt)
         const retdate = ret.toLocaleDateString("en-IN")
         const rettime = ret.toLocaleTimeString("en-IN")
-        console.log(data.borrowedAt)
+
         const bookTableRow = document.createElement('tr');
         bookTableRow.innerHTML = `
           <td>${index + 1}</td>
           <td style="cursor:pointer" onclick="window.location.href = 'bookdetails.html?id=${data.bookId._id}';">${data.bookId.title}</td>
-          <td>${bordate}<br> ${bortime}</td>
-          <td>${retdate}<br> ${rettime}</td>
+          <td>${bordate} <br> ${bortime}</td>
+          <td>${retdate == "Invalid Date" ? "Not Returned" : retdate + '<br>' + rettime }</td>
+          
           
         `;
         bookTable.appendChild(bookTableRow);
